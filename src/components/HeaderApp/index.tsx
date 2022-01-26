@@ -16,7 +16,7 @@ export function HeaderApp() {
   };
 
   return (
-    <Navbar color="dark" dark expand="sm" light>
+    <Navbar color="dark" dark expand="sm" light className="rounded-top">
       <NavbarBrand>
         <BsFillChatLeftTextFill size={30} />
         <span className="fw-bold ms-2">Chat App</span>
