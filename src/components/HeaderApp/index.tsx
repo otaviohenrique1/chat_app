@@ -4,7 +4,11 @@ import { BsFillChatLeftTextFill } from "react-icons/bs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export function HeaderApp() {
+interface HeaderAppProps {
+  nome?: string;
+}
+
+export function HeaderApp(props: HeaderAppProps) {
   const [aberto, setAberto] = useState<boolean>(false);
   const toggle = () => {
     setAberto(!aberto)
@@ -30,8 +34,9 @@ export function HeaderApp() {
             </Link>
           </NavItem>
           <Dropdown toggle={toggleDropdown} isOpen={dropdownAberto}>
-            <DropdownToggle caret>
-              <BiUserCircle size={30} />
+            <DropdownToggle caret className="d-flex flex-row justify-content-center align-items-center">
+              <h6 className="m-0">{(props.nome) ? props.nome : '[Nome do usuario]'}</h6>
+              <BiUserCircle size={30} className="ms-2" />
             </DropdownToggle>
             <DropdownMenu dark>
               <DropdownItem>
