@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Container } from "reactstrap";
-import { HeaderApp } from "../HeaderApp";
+// import { HeaderApp } from "../HeaderApp";
 
 interface ContainerAppProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface ContainerAppProps {
 export function ContainerApp(props: ContainerAppProps) {
   return (
     <>
-      <HeaderApp />
+      {/* <HeaderApp /> */}
       <Container>{props.children}</Container>
     </>
   );
