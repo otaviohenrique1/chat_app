@@ -1,14 +1,21 @@
 import { Nav, Navbar, NavItem, Collapse, DropdownItem, DropdownMenu, DropdownToggle, NavbarBrand, NavbarToggler, Dropdown } from "reactstrap";
 import { BiUserCircle } from "react-icons/bi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UsuarioLogadoDataTypes } from "../AreaConversa";
 
 interface HeaderAppProps {
-  nome?: string;
+  data_usuario_logado: UsuarioLogadoDataTypes;
 }
 
 export function HeaderApp(props: HeaderAppProps) {
+  const [data, setData] = useState<UsuarioLogadoDataTypes>({ id_usuario: '', nome: '' });
+
+  useEffect(() => {
+    setData(props.data_usuario_logado);
+  }, [props.data_usuario_logado]);
+
   const [aberto, setAberto] = useState<boolean>(false);
   const toggle = () => {
     setAberto(!aberto)
@@ -35,7 +42,7 @@ export function HeaderApp(props: HeaderAppProps) {
           </NavItem>
           <Dropdown toggle={toggleDropdown} isOpen={dropdownAberto}>
             <DropdownToggle caret className="d-flex flex-row justify-content-center align-items-center">
-              <h6 className="m-0">{(props.nome) ? props.nome : '[Nome do usuario]'}</h6>
+              <h6 className="m-0">{(data.nome) ? data.nome : '[Nome do usuario]'}</h6>
               <BiUserCircle size={30} className="ms-2" />
             </DropdownToggle>
             <DropdownMenu dark>

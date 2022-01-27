@@ -2,12 +2,29 @@ import { Card, CardBody, CardFooter, CardHeader, Container, Row } from "reactstr
 import { HeaderApp } from "../../components/HeaderApp";
 import styled from "styled-components";
 import { conversa_Lola_Maria, lista_usuarios, usuario_logado } from "../../utils/listas_teste";
-import { ListaContatos } from "../../components/ListaContatos";
-import { AreaConversa } from "../../components/AreaConversa";
+import { ContatoDataTypes, ListaContatos } from "../../components/ListaContatos";
+import { AreaConversa, ConversaTypes, UsuarioLogadoDataTypes } from "../../components/AreaConversa";
 import { FormikHelpers } from "formik";
 import { FormTypes, Formulario } from "../../components/Formulario";
+import { useEffect, useState } from "react";
 
 export function HomePage() {
+  const [dataContatos, setDataContatos] = useState<ContatoDataTypes[]>([]);
+  const [dataConversa, setDataConversa] = useState<ConversaTypes[]>([]);
+  const [dataUsuarioLogado, setDataUsuarioLogado] = useState<UsuarioLogadoDataTypes>({ id_usuario: '', nome: '' });
+
+  useEffect(() => {
+    setDataUsuarioLogado(usuario_logado);
+  }, []);
+
+  useEffect(() => {
+    setDataContatos(lista_usuarios);
+  }, []);
+
+  useEffect(() => {
+    setDataConversa(conversa_Lola_Maria);
+  }, []);
+
   function onSubmit(values: FormTypes, formikHelpers: FormikHelpers<FormTypes>) {
     console.log(values.mensagem);
     formikHelpers.resetForm();
@@ -17,16 +34,16 @@ export function HomePage() {
     <Container className="h-100 w-100 d-flex justify-content-center align-items-center">
       <CardEstilizado>
         <CardHeader className="p-0">
-          <HeaderApp nome={usuario_logado.nome} />
+          <HeaderApp data_usuario_logado={dataUsuarioLogado} />
         </CardHeader>
         <CardBody className="p-0">
           <Row className="p-0 m-0 h-100">
             <ListaContatos
-              lista_contatos_data={lista_usuarios}
+              lista_contatos_data={dataContatos}
             />
             <AreaConversa
-              conversa_data={conversa_Lola_Maria}
-              usuario_logado_data={usuario_logado}
+              conversa_data={dataConversa}
+              usuario_logado_data={dataUsuarioLogado}
             />
           </Row>
         </CardBody>
