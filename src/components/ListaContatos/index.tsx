@@ -37,17 +37,21 @@ interface ContatoProps {
 }
 
 function Contato(props: ContatoProps) {
+  const [statusUsuario, setStatusUsuario] = useState<string>('');
+
+  useEffect(() => {
+    let status = props.contato_data.status;
+    let validaStatus = (status === Status.ONLINE) ? 'green' :
+      (status === Status.OFFLINE) ? 'red' :
+        (status === Status.AUSENTE) ? 'yellow' : 'gray';
+    setStatusUsuario(validaStatus);
+  }, [props.contato_data.status]);
+
   return (
     <ListGroupItem className="d-flex flex-row justify-content-center align-items-center">
       <BiUserCircle size={30} />
       <h6 className="ms-2 mb-0 w-100">{props.contato_data.nome}</h6>
-      <BsCircleFill
-        color={
-          (props.contato_data.status === 'online') ? 'green' :
-            (props.contato_data.status === 'offline') ? 'red' :
-              (props.contato_data.status === 'ausente') ? 'yellow' : undefined
-        }
-      />
+      <BsCircleFill color={statusUsuario} />
     </ListGroupItem>
   );
 }
