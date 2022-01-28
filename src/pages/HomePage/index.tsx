@@ -5,7 +5,7 @@ import { conversa_Lola_Maria, lista_usuarios, usuario_logado } from "../../utils
 import { ContatoDataTypes, ListaContatos } from "../../components/ListaContatos";
 import { AreaConversa, ConversaTypes, UsuarioLogadoDataTypes } from "../../components/AreaConversa";
 import { FormikHelpers } from "formik";
-import { FormTypes, Formulario } from "../../components/Formulario";
+import { FormularioTypes, Formulario } from "../../components/Formulario";
 import { useEffect, useState } from "react";
 
 export function HomePage() {
@@ -25,10 +25,14 @@ export function HomePage() {
     setDataConversa(conversa_Lola_Maria);
   }, []);
 
-  function onSubmit(values: FormTypes, formikHelpers: FormikHelpers<FormTypes>) {
+  function addConversa(values: FormularioTypes, formikHelpers: FormikHelpers<FormularioTypes>) {
     console.log(values.mensagem);
     formikHelpers.resetForm();
   }
+
+  // function addContato() {
+    
+  // }
 
   return (
     <Container className="h-100 w-100 d-flex justify-content-center align-items-center">
@@ -48,7 +52,7 @@ export function HomePage() {
           </Row>
         </CardBody>
         <CardFooter>
-          <Formulario onSubmit={onSubmit} />
+          <Formulario onSubmit={addConversa} />
         </CardFooter>
       </CardEstilizado>
     </Container>

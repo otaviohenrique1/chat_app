@@ -8,16 +8,16 @@ const validacaoSchema = Yup.object().shape({
   mensagem: Yup.string().required("Campo vazio"),
 });
 
-const valoresIniciais: FormTypes = {
+const valoresIniciais: FormularioTypes = {
   mensagem: ""
 };
 
-export interface FormTypes {
+export interface FormularioTypes {
   mensagem: string;
 }
 
 interface FormularioProps {
-  onSubmit: (values: FormTypes, formikHelpers: FormikHelpers<FormTypes>) => void;
+  onSubmit: (values: FormularioTypes, formikHelpers: FormikHelpers<FormularioTypes>) => void;
 }
 
 export function Formulario(props: FormularioProps) {
